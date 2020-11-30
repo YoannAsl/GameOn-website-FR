@@ -70,7 +70,7 @@ const validate = () => {
     return false;
   }
 
-  if (!birthDate.value.match(/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/)) {
+  if (!/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/.test(birthDate.value)) {
     newText.innerHTML = "Veuillez entrer votre date de naissance.";
     document.querySelector(".birthdate").appendChild(newText);
     return false;
