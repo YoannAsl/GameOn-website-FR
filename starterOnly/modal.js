@@ -30,6 +30,12 @@ const closeModal = () => {
 closeModalBtn.addEventListener("click", closeModal);
 
 const validate = () => {
+  const firstName = document.querySelector('#first');
+  const lastName = document.querySelector('#last');
+  const email = document.querySelector('#email');
+  const birthDate = document.querySelector('#birthdate');
+  const quantityTournament = document.querySelector('#quantity');
+
   // Return une nodelist 
   const checkboxes = document.querySelectorAll(".city-checkbox:checked");
   // Return un element
@@ -44,6 +50,36 @@ const validate = () => {
     errMsgs.forEach(e => {
       e.parentNode.removeChild(e)
     });
+  }
+
+  if (firstName.value.length < 2) {
+    newText.innerHTML = "Veuillez entrer 2 caractères ou plus pour le champ du prénom.";
+    document.querySelector(".first").appendChild(newText);
+    return false;
+  }
+
+  if (lastName.value.length < 2) {
+    newText.innerHTML = "Veuillez entrer 2 caractères ou plus pour le champ du nom.";
+    document.querySelector(".last").appendChild(newText);
+    return false;
+  }
+ 
+  if (!/[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(email.value)) {
+    newText.innerHTML = "Veuillez entrer une addresse mail valide.";
+    document.querySelector(".email").appendChild(newText);
+    return false;
+  }
+
+  if (!birthDate.value.match(/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/)) {
+    newText.innerHTML = "Veuillez entrer votre date de naissance.";
+    document.querySelector(".birthdate").appendChild(newText);
+    return false;
+  }
+
+  if (quantityTournament.value.length < 1) {
+    newText.innerHTML = "Veuillez indiquer un nombre.";
+    document.querySelector(".quantity").appendChild(newText);
+    return false;
   }
 
   // Check si au moins 1 ville est cochée
