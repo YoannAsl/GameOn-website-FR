@@ -35,8 +35,16 @@ const validate = () => {
   // Return un element
   const terms = document.querySelector("#checkbox1:checked");
 
+  const errMsgs = document.querySelectorAll(".error-msg");
   const newText = document.createElement("p");
   newText.className = "error-msg";
+
+  // Evite que le message d'erreur s'affiche plusieurs fois
+  if (errMsgs.length > 0) {
+    errMsgs.forEach(e => {
+      e.parentNode.removeChild(e)
+    });
+  }
 
   // Check si au moins 1 ville est cochée
   if (checkboxes.length == 0) {
@@ -47,9 +55,7 @@ const validate = () => {
   
   // Check si les conditions d'utilisations sont cochées
   if (terms == null) {
-    // Ajoute une classe
     newText.classList.add("terms-error");
-    
     newText.innerHTML = "Vous devez vérifier que vous acceptez les termes et conditions.";
     document.querySelector(".checkbox1_label").appendChild(newText);
     return false;
